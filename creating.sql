@@ -1,0 +1,11 @@
+CREATE DATABASE IF NOT EXISTS FinalProject;
+
+CREATE TABLE IF NOT EXISTS Categoria (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    categoria VARCHAR(20)
+);
+
+CREATE TABLE IF NOT EXISTS Acessibilidade (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    acessibilidade VARCHAR(30)
+);
