@@ -88,3 +88,41 @@ BEGIN
 );
 
 END $$
+
+CREATE PROCEDURE salvar_denuncia(
+    IN p_browser_id_denuncia INT,
+    IN p_feedback TEXT,
+    IN p_concluido BOOLEAN,
+    IN p_fk_servico INT
+)
+BEGIN
+    -- Verifica se já existe um registro com o mesmo browser_id
+    DECLARE v_exists INT;
+    SET v_exists = (SELECT COUNT(*) FROM denuncia_temp WHERE browser_id = p_browser_id_denuncia);
+    
+    -- Se não existe, insere na tabela denuncia_temp
+    IF v_exists = 0 THEN
+        INSERT INTO denuncia_temp (browser_id, feedback, concluido, FK_servico) 
+        VALUES (p_browser_id_denuncia, p_feedback, p_concluido, p_fk_servico);
+    ELSE
+        -- Se já existe, atualiza o registro na tabela denuncia_temp
+        UPDATE denuncia_temp 
+        SET feedback = p_feedback, 
+            concluido = p_concluido, 
+            FK_servico = p_fk_servico, 
+            updated_at = CURRENT_TIMESTAMP
+        WHERE browser_id = p_browser_id_denuncia;
+    END IF;
+    
+    -- Se o registro estiver concluído, move os dados para a tabela denuncia
+    IF p_concluido = TRUE THEN
+        INSERT INTO denuncia (feedback, data, FK_servico)
+        SELECT feedback, data, FK_servico
+        FROM denuncia_temp
+        WHERE browser_id = p_browser_id_denuncia;
+        
+        -- Após mover, deleta o registro de denuncia_temp
+        DELETE FROM denuncia_temp WHERE browser_id = p_browser_id_denuncia;
+    END IF;
+END $$
+
