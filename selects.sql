@@ -42,3 +42,10 @@ SELECT c.categoria, COUNT(s.id) AS total_servicos
 FROM categoria c
 LEFT JOIN novo_servico s ON c.id = s.FK_categoria
 GROUP BY c.categoria;
+
+
+# Quantidade de serviços por bairro
+SELECT bairro, COUNT(id) AS total_servicos
+FROM servico
+GROUP BY bairro
+ORDER BY total_servicos DESC;
