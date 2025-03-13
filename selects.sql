@@ -1,8 +1,85 @@
 -- Total de acessibilidades dispostas em indicações de serviços
-
 SELECT a.acessibilidade, COUNT(sa.id_novo_servico) AS total_servicos
 FROM acessibilidade a
 LEFT JOIN novo_servico_acessibilidade sa ON a.id = sa.id_acessibilidade
+
+-- Total de avaliações que cada serviço possui
+SELECT s.nome, COUNT(a.id) AS total_avaliacoes
+FROM servico s
+LEFT JOIN avaliacao a ON s.id = a.FK_servico
+GROUP BY s.nome
+ORDER BY total_avaliacoes DESC;
+
+-- Total de avaliações por categoria
+SELECT c.categoria, COALESCE(AVG(a.pontuacao), 0) AS media_pontuacao
+FROM categoria c
+LEFT JOIN servico s ON c.id = s.FK_categoria
+LEFT JOIN avaliacao a ON s.id = a.FK_servico
+GROUP BY c.categoria
+ORDER BY media_pontuacao DESC;
+
+-- Total de denuncias que cada serviço possui
+SELECT s.nome, COUNT(d.id) AS total_denuncias
+FROM servico s
+LEFT JOIN denuncia d ON s.id = d.FK_servico
+GROUP BY s.nome
+ORDER BY total_denuncias DESC;
+
+# Total de serviços que possuem alguma acessibilidade ou nenhuma acessibilidade
+SELECT 
+    CASE 
+        WHEN EXISTS (SELECT 1 FROM servico_acessibilidade sa WHERE sa.id_servico = s.id) 
+        THEN 'Com Acessibilidade' 
+        ELSE 'Sem Acessibilidade' 
+    END AS tipo,
+    COUNT(s.id) AS total
+FROM servico s
+GROUP BY tipo;
+
+# Total de indicações de serviços que possuem alguma acessibilidade ou nenhuma acessibilidade
+SELECT 
+    CASE 
+        WHEN EXISTS (SELECT 1 FROM novo_servico_acessibilidade sa WHERE sa.id_novo_servico = s.id) 
+        THEN 'Com Acessibilidade' 
+        ELSE 'Sem Acessibilidade' 
+    END AS tipo,
+    COUNT(s.id) AS total
+FROM novo_servico s
+GROUP BY tipo;
+
+# Quantidade total da pontuação 
+SELECT pontuacao, COUNT(id) AS total_avaliacoes
+FROM avaliacao
+GROUP BY pontuacao
+ORDER BY pontuacao ASC;
+
+# Cidades que possuem serviços que possuem as maiores médias de serviço (em ordem descrescente)
+SELECT s.cidade, COALESCE(AVG(a.pontuacao), 0) AS media_avaliacoes
+FROM servico s
+LEFT JOIN avaliacao a ON s.id = a.FK_servico
+GROUP BY s.cidade
+ORDER BY media_avaliacoes DESC;
+
+# Top 5 serviços com maiores média 
+SELECT s.nome, COALESCE(AVG(a.pontuacao), 0) AS media_pontuacao
+FROM servico s
+LEFT JOIN avaliacao a ON s.id = a.FK_servico
+GROUP BY s.nome
+ORDER BY media_pontuacao DESC
+LIMIT 5;
+
+# Categoria com mais números de denuncia
+SELECT c.categoria, COUNT(d.id) AS total_denuncias
+FROM categoria c
+LEFT JOIN servico s ON c.id = s.FK_categoria
+LEFT JOIN denuncia d ON s.id = d.FK_servico
+GROUP BY c.categoria
+ORDER BY total_denuncias DESC;
+
+# Proporção de serviços disponibilizados vs serviços sugeridos
+SELECT 'Novo Serviço' AS tipo, COUNT(id) AS total FROM novo_servico
+UNION ALL
+SELECT 'Serviço Ativo', COUNT(id) FROM servico WHERE status = 'Ativo';
 
 # Todos os serviços com principais informações ao lado 
 SELECT 
