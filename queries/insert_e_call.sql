@@ -1,11 +1,11 @@
-Obs:. Dados populados por IA, logo, possuem dados incoerentes em algumas partes.
-
 # Criando admins
 INSERT INTO admin(nome, email, senha) 
 VALUES 
     ("Admin1", "admin1@admin.com", "admin1"),
     ("Admin2", "admin2@admin.com", "admin2"),
-    ("Admin3", "admin3@admin.com", "admin3");
+    ("Admin3", "admin3@admin.com", "admin3"),
+    ("Admin4", "admin4@admin.com", "admin4"),
+    ("Admin5", "admin5@admin.com", "admin5");
 
 # Criando tipos de categoria
 INSERT INTO categoria (categoria)
@@ -171,7 +171,139 @@ CALL salvar_novo_servico(68, 'Treinamento em Marketing Digital', '(31)90123-4567
 CALL salvar_novo_servico(69, 'Curso de Mecânica Básica', '(31)91234-5678', 'Aprenda manutenção básica de veículos.', 'EPIs fornecidos.', 'Sáb-Dom 09h-12h', 'Av. dos Motores', '190', 'Pampulha', 'Belo Horizonte', '30360-000', 4, '16', TRUE);
 CALL salvar_novo_servico(70, 'Aulas de Dança de Salão', '(31)92345-6789', 'Salsa, forró e samba de gafieira.', 'Roupas confortáveis recomendadas.', 'Seg-Sex 18h-21h', 'Rua da Dança', '130', 'Centro', 'Belo Horizonte', '30370-000', 5, '', TRUE);
 
+### Exemplo de chamada de procedure
+### (ID do serviço na tabela novo_servico, ID do admin que rejeitou)
+# CALL rejeitar_servico(1, 1); -- Rejeita a indicação de serviço em novo_servico
 
+# Criando várias rejeições de novo_servico
+CALL rejeitar_servico(5, 1);
+CALL rejeitar_servico(12, 2);
+CALL rejeitar_servico(7, 3);
+CALL rejeitar_servico(20, 1);
+CALL rejeitar_servico(33, 2);
+CALL rejeitar_servico(18, 3);
+CALL rejeitar_servico(25, 1);
+CALL rejeitar_servico(9, 2);
+CALL rejeitar_servico(40, 1);
+CALL rejeitar_servico(13, 3);
+CALL rejeitar_servico(28, 2);
+CALL rejeitar_servico(35, 1);
+CALL rejeitar_servico(17, 3);
+CALL rejeitar_servico(2, 1);
+CALL rejeitar_servico(22, 2);
+CALL rejeitar_servico(8, 3);
+CALL rejeitar_servico(30, 1);
+CALL rejeitar_servico(3, 2);
+CALL rejeitar_servico(50, 3);
+CALL rejeitar_servico(19, 1);
+CALL rejeitar_servico(52, 1);
+CALL rejeitar_servico(61, 2);
+CALL rejeitar_servico(73, 3);
+CALL rejeitar_servico(84, 1);
+CALL rejeitar_servico(96, 2);
+CALL rejeitar_servico(102, 3);
+CALL rejeitar_servico(115, 1);
+CALL rejeitar_servico(121, 2);
+CALL rejeitar_servico(124, 3);
+CALL rejeitar_servico(58, 1);
+CALL rejeitar_servico(67, 2);
+CALL rejeitar_servico(79, 3);
+CALL rejeitar_servico(88, 1);
+CALL rejeitar_servico(99, 2);
+CALL rejeitar_servico(107, 3);
+CALL rejeitar_servico(116, 1);
+CALL rejeitar_servico(120, 2);
+CALL rejeitar_servico(123, 3);
+CALL rejeitar_servico(63, 1);
+CALL rejeitar_servico(74, 2);
+CALL rejeitar_servico(85, 3);
+CALL rejeitar_servico(92, 1);
+CALL rejeitar_servico(104, 2);
+CALL rejeitar_servico(110, 3);
+CALL rejeitar_servico(118, 1);
+CALL rejeitar_servico(122, 2);
+
+
+### Exemplo de chamada de procedure 
+### (ID do serviço na tabela novo_servico, ID do admin que aprovou)
+# CALL aprovar_servico(2, 1); -- Aceita a indicação de novo_servico, duplicando o dado em servico e atualizando o campo em novo_servico
+
+# Criando várias aprovações de novo_servico
+CALL aprovar_servico(1, 2);
+CALL aprovar_servico(6, 3);
+CALL aprovar_servico(14, 1);
+CALL aprovar_servico(21, 2);
+CALL aprovar_servico(34, 3);
+CALL aprovar_servico(11, 1);
+CALL aprovar_servico(25, 2);
+CALL aprovar_servico(15, 3);
+CALL aprovar_servico(38, 1);
+CALL aprovar_servico(27, 2);
+CALL aprovar_servico(44, 3);
+CALL aprovar_servico(19, 1);
+CALL aprovar_servico(3, 2);
+CALL aprovar_servico(17, 3);
+CALL aprovar_servico(22, 1);
+CALL aprovar_servico(32, 2);
+CALL aprovar_servico(9, 3);
+CALL aprovar_servico(28, 1);
+CALL aprovar_servico(49, 2);
+CALL aprovar_servico(5, 3);
+CALL aprovar_servico(51, 1);
+CALL aprovar_servico(62, 2);
+CALL aprovar_servico(73, 3);
+CALL aprovar_servico(84, 1);
+CALL aprovar_servico(95, 2);
+CALL aprovar_servico(103, 3);
+CALL aprovar_servico(112, 1);
+CALL aprovar_servico(121, 2);
+CALL aprovar_servico(124, 3);
+CALL aprovar_servico(58, 1);
+CALL aprovar_servico(67, 2);
+CALL aprovar_servico(79, 3);
+CALL aprovar_servico(88, 1);
+CALL aprovar_servico(99, 2);
+CALL aprovar_servico(107, 3);
+CALL aprovar_servico(116, 1);
+CALL aprovar_servico(120, 2);
+CALL aprovar_servico(123, 3);
+CALL aprovar_servico(63, 1);
+CALL aprovar_servico(74, 2);
+CALL aprovar_servico(85, 3);
+CALL aprovar_servico(92, 1);
+CALL aprovar_servico(104, 2);
+CALL aprovar_servico(110, 3);
+CALL aprovar_servico(118, 1);
+CALL aprovar_servico(122, 2);
+CALL aprovar_servico(51, 1);
+CALL aprovar_servico(52, 2);
+CALL aprovar_servico(53, 3);
+CALL aprovar_servico(54, 1);
+CALL aprovar_servico(55, 2);
+CALL aprovar_servico(56, 3);
+CALL aprovar_servico(57, 1);
+CALL aprovar_servico(58, 2);
+CALL aprovar_servico(59, 3);
+CALL aprovar_servico(60, 1);
+CALL aprovar_servico(61, 2);
+CALL aprovar_servico(62, 3);
+CALL aprovar_servico(63, 1);
+CALL aprovar_servico(64, 2);
+CALL aprovar_servico(65, 3);
+CALL aprovar_servico(66, 1);
+CALL aprovar_servico(67, 2);
+CALL aprovar_servico(68, 3);
+CALL aprovar_servico(69, 1);
+CALL aprovar_servico(70, 2);
+CALL aprovar_servico(71, 3);
+CALL aprovar_servico(72, 1);
+CALL aprovar_servico(73, 2);
+CALL aprovar_servico(74, 3);
+CALL aprovar_servico(75, 1);
+CALL aprovar_servico(76, 2);
+CALL aprovar_servico(77, 3);
+CALL aprovar_servico(78, 1);
+CALL aprovar_servico(79, 2);
 
 ### Exemplo de chamada de procedure 
 ### (ID gerado no navegador do usuario, pontuação de 1 a 5, feedback, se está concluído ou não, chave estrangeira do servico)
@@ -391,136 +523,18 @@ CALL salvar_denuncia(48, 'O serviço de saúde mental foi muito eficaz, recebi u
 CALL salvar_denuncia(49, 'O curso de yoga gratuito foi uma ótima experiência, com um ambiente calmo e instrutores experientes que me ajudaram a melhorar meu bem-estar.', TRUE, 49);
 CALL salvar_denuncia(50, 'O evento cultural foi maravilhoso, com apresentações de qualidade e um público animado, fiquei muito satisfeito.', TRUE, 50);
 
-### Exemplo de chamada de procedure
-### (ID do serviço na tabela novo_servico, ID do admin que rejeitou)
-# CALL rejeitar_servico(1, 1); -- Rejeita a indicação de serviço em novo_servico
-
-# Criando várias rejeições de novo_servico
-CALL rejeitar_servico(5, 1);
-CALL rejeitar_servico(12, 2);
-CALL rejeitar_servico(7, 3);
-CALL rejeitar_servico(20, 1);
-CALL rejeitar_servico(33, 2);
-CALL rejeitar_servico(18, 3);
-CALL rejeitar_servico(25, 1);
-CALL rejeitar_servico(9, 2);
-CALL rejeitar_servico(40, 1);
-CALL rejeitar_servico(13, 3);
-CALL rejeitar_servico(28, 2);
-CALL rejeitar_servico(35, 1);
-CALL rejeitar_servico(17, 3);
-CALL rejeitar_servico(2, 1);
-CALL rejeitar_servico(22, 2);
-CALL rejeitar_servico(8, 3);
-CALL rejeitar_servico(30, 1);
-CALL rejeitar_servico(3, 2);
-CALL rejeitar_servico(50, 3);
-CALL rejeitar_servico(19, 1);
-CALL rejeitar_servico(52, 1);
-CALL rejeitar_servico(61, 2);
-CALL rejeitar_servico(73, 3);
-CALL rejeitar_servico(84, 1);
-CALL rejeitar_servico(96, 2);
-CALL rejeitar_servico(102, 3);
-CALL rejeitar_servico(115, 1);
-CALL rejeitar_servico(121, 2);
-CALL rejeitar_servico(124, 3);
-CALL rejeitar_servico(58, 1);
-CALL rejeitar_servico(67, 2);
-CALL rejeitar_servico(79, 3);
-CALL rejeitar_servico(88, 1);
-CALL rejeitar_servico(99, 2);
-CALL rejeitar_servico(107, 3);
-CALL rejeitar_servico(116, 1);
-CALL rejeitar_servico(120, 2);
-CALL rejeitar_servico(123, 3);
-CALL rejeitar_servico(63, 1);
-CALL rejeitar_servico(74, 2);
-CALL rejeitar_servico(85, 3);
-CALL rejeitar_servico(92, 1);
-CALL rejeitar_servico(104, 2);
-CALL rejeitar_servico(110, 3);
-CALL rejeitar_servico(118, 1);
-CALL rejeitar_servico(122, 2);
-
-
-### Exemplo de chamada de procedure 
-### (ID do serviço na tabela novo_servico, ID do admin que aprovou)
-# CALL aprovar_servico(2, 1); -- Aceita a indicação de novo_servico, duplicando o dado em servico e atualizando o campo em novo_servico
-
-# Criando várias aprovações de novo_servico
-CALL aprovar_servico(1, 2);
-CALL aprovar_servico(6, 3);
-CALL aprovar_servico(14, 1);
-CALL aprovar_servico(21, 2);
-CALL aprovar_servico(34, 3);
-CALL aprovar_servico(11, 1);
-CALL aprovar_servico(25, 2);
-CALL aprovar_servico(15, 3);
-CALL aprovar_servico(38, 1);
-CALL aprovar_servico(27, 2);
-CALL aprovar_servico(44, 3);
-CALL aprovar_servico(19, 1);
-CALL aprovar_servico(3, 2);
-CALL aprovar_servico(17, 3);
-CALL aprovar_servico(22, 1);
-CALL aprovar_servico(32, 2);
-CALL aprovar_servico(9, 3);
-CALL aprovar_servico(28, 1);
-CALL aprovar_servico(49, 2);
-CALL aprovar_servico(5, 3);
-CALL aprovar_servico(51, 1);
-CALL aprovar_servico(62, 2);
-CALL aprovar_servico(73, 3);
-CALL aprovar_servico(84, 1);
-CALL aprovar_servico(95, 2);
-CALL aprovar_servico(103, 3);
-CALL aprovar_servico(112, 1);
-CALL aprovar_servico(121, 2);
-CALL aprovar_servico(124, 3);
-CALL aprovar_servico(58, 1);
-CALL aprovar_servico(67, 2);
-CALL aprovar_servico(79, 3);
-CALL aprovar_servico(88, 1);
-CALL aprovar_servico(99, 2);
-CALL aprovar_servico(107, 3);
-CALL aprovar_servico(116, 1);
-CALL aprovar_servico(120, 2);
-CALL aprovar_servico(123, 3);
-CALL aprovar_servico(63, 1);
-CALL aprovar_servico(74, 2);
-CALL aprovar_servico(85, 3);
-CALL aprovar_servico(92, 1);
-CALL aprovar_servico(104, 2);
-CALL aprovar_servico(110, 3);
-CALL aprovar_servico(118, 1);
-CALL aprovar_servico(122, 2);
-CALL aprovar_servico(51, 1);
-CALL aprovar_servico(52, 2);
-CALL aprovar_servico(53, 3);
-CALL aprovar_servico(54, 1);
-CALL aprovar_servico(55, 2);
-CALL aprovar_servico(56, 3);
-CALL aprovar_servico(57, 1);
-CALL aprovar_servico(58, 2);
-CALL aprovar_servico(59, 3);
-CALL aprovar_servico(60, 1);
-CALL aprovar_servico(61, 2);
-CALL aprovar_servico(62, 3);
-CALL aprovar_servico(63, 1);
-CALL aprovar_servico(64, 2);
-CALL aprovar_servico(65, 3);
-CALL aprovar_servico(66, 1);
-CALL aprovar_servico(67, 2);
-CALL aprovar_servico(68, 3);
-CALL aprovar_servico(69, 1);
-CALL aprovar_servico(70, 2);
-CALL aprovar_servico(71, 3);
-CALL aprovar_servico(72, 1);
-CALL aprovar_servico(73, 2);
-CALL aprovar_servico(74, 3);
-CALL aprovar_servico(75, 1);
-CALL aprovar_servico(76, 2);
-CALL aprovar_servico(77, 3);
-CALL aprovar_servico(78, 1);
-CALL aprovar_servico(79, 2);
+UPDATE servico SET status = 'inativo' WHERE id = 5;
+UPDATE servico SET status = 'inativo' WHERE id = 8;
+UPDATE servico SET status = 'inativo' WHERE id = 12;
+UPDATE servico SET status = 'inativo' WHERE id = 15;
+UPDATE servico SET status = 'inativo' WHERE id = 18;
+UPDATE servico SET status = 'inativo' WHERE id = 22;
+UPDATE servico SET status = 'inativo' WHERE id = 25;
+UPDATE servico SET status = 'inativo' WHERE id = 30;
+UPDATE servico SET status = 'inativo' WHERE id = 34;
+UPDATE servico SET status = 'inativo' WHERE id = 40;
+UPDATE servico SET status = 'inativo' WHERE id = 45;
+UPDATE servico SET status = 'inativo' WHERE id = 50;
+UPDATE servico SET status = 'inativo' WHERE id = 55;
+UPDATE servico SET status = 'inativo' WHERE id = 60;
+UPDATE servico SET status = 'inativo' WHERE id = 70;

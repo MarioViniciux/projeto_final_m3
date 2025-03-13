@@ -25,4 +25,4 @@ BEGIN
     DELETE FROM avaliacao_temp WHERE updated_at < (NOW() - INTERVAL 15 MINUTE);
 END $$
 
-DELIMITER ;;
+DELIMITER ;

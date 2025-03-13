@@ -1,0 +1,141 @@
+Table categoria {
+  id integer pk
+  categoria varchar
+}
+
+Table acessibilidade {
+  id integer pk
+  acessibilidade varchar
+}
+
+Table servico {
+  id integer pk
+  nome varchar
+  contato varchar
+  descricao text
+  requisitos text
+  funcionamento varchar
+  status enum
+  rua varchar
+  numero varchar
+  bairro varchar
+  cidade varchar
+  cep varchar
+  created_at timestamp
+  updated_at timestamp
+  FK_categoria integer
+}
+
+Table novo_servico {
+  id integer pk
+  nome varchar
+  contato varchar
+  descricao text
+  requisitos text
+  funcionamento varchar
+  status enum
+  rua varchar
+  numero varchar
+  bairro varchar
+  cidade varchar
+  cep varchar
+  created_at timestamp
+  updated_at timestamp
+  FK_categoria integer
+  FK_admin integer
+}
+
+Table novo_servico_temp {
+  id integer pk
+  nome varchar
+  contato varchar
+  descricao text
+  requisitos text
+  funcionamento varchar
+  rua varchar
+  número varchar
+  bairro varchar
+  cidade varchar
+  cep varchar
+  acessibilidade text
+  created_at timestamp
+  updated_at timestamp
+  FK_categoria integer
+}
+
+Table avaliacao {
+  id integer pk
+  feedback text
+  pontuacao tinyint
+  data datetime
+  FK_servico integer
+}
+
+Table avaliacao_temp {
+  id integer pk
+  browser_id integer
+  feedback text
+  pontuacao tinyint
+  data datetime
+  concluido boolean
+  updated_at timestamp
+  FK_servico integer
+}
+
+Table denuncia {
+  id integer pk
+  feedback text
+  data datetime
+  FK_servico integer
+}
+
+Table denuncia_temp {
+  id integer pk
+  browser_id integer
+  feedback text
+  data datetime
+  concluido boolean
+  updated_at timestamp
+  FK_servico integer
+}
+
+Table admin {
+  id integer pk
+  nome varchar
+  email varchar
+  senha varchar
+}
+
+Table servico_acessibilidade {
+  id_servico integer pk
+  id_acessibilidade integer pk
+}
+
+Table novo_servico_acessibilidade {
+  id_servico integer pk
+  id_acessibilidade integer pk
+}
+
+Ref: "categoria"."id" < "servico"."FK_categoria"
+
+Ref: "categoria"."id" < "novo_servico_temp"."FK_categoria"
+
+Ref: "categoria"."id" < "novo_servico"."FK_categoria"
+
+Ref: "acessibilidade"."id" < "novo_servico_acessibilidade"."id_acessibilidade"
+
+Ref: "acessibilidade"."id" < "servico_acessibilidade"."id_acessibilidade"
+
+Ref: "servico"."id" < "servico_acessibilidade"."id_servico"
+
+Ref: "novo_servico"."id" < "novo_servico_acessibilidade"."id_servico"
+
+Ref: "avaliacao"."FK_servico" > "servico"."id"
+
+Ref: "denuncia"."FK_servico" > "servico"."id"
+
+Ref: "servico"."id" < "avaliacao_temp"."FK_servico"
+
+Ref: "servico"."id" < "denuncia_temp"."FK_servico"
+
+Ref: "admin"."id" < "novo_servico"."FK_admin"
