@@ -35,3 +35,10 @@ SELECT c.categoria, COUNT(s.id) AS total_servicos
 FROM categoria c
 LEFT JOIN servico s ON c.id = s.FK_categoria
 GROUP BY c.categoria;
+
+
+# Quantidade de indicações de serviços por categoria
+SELECT c.categoria, COUNT(s.id) AS total_servicos
+FROM categoria c
+LEFT JOIN novo_servico s ON c.id = s.FK_categoria
+GROUP BY c.categoria;
