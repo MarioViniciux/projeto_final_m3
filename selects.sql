@@ -56,3 +56,10 @@ SELECT bairro, COUNT(id) AS total_servicos
 FROM novo_servico
 GROUP BY bairro
 ORDER BY total_servicos DESC;
+
+
+# Quantidade de serviço por cidade
+SELECT cidade, COUNT(id) AS total_servicos
+FROM servico
+GROUP BY cidade
+ORDER BY total_servicos DESC;
