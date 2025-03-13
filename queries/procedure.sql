@@ -142,24 +142,6 @@ BEGIN
     END IF;
 END $$
 
-CREATE PROCEDURE remover_servico_com_muita_denuncia()
-BEGIN
-	-- Remover serviços que tenham mais de 40 denúncias
-	DELETE FROM servico
-	WHERE id IN (
-	SELECT id FROM (
-	SELECT s.id
-	FROM servico s
-	JOIN denuncia d ON s.id = d.FK_servico
-	GROUP BY s.id
-	HAVING COUNT(d.id) > 40
-	) AS subquery
-
-	-- As denúncias são removidas automaticamente devido ao ON DELETE CASCADE
-);
-
-END $$
-
 CREATE PROCEDURE salvar_denuncia(
     IN p_browser_id_denuncia INT,
     IN p_feedback TEXT,

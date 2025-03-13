@@ -2,7 +2,22 @@ DELIMITER $$
 
 CREATE EVENT IF NOT EXISTS remover_servico
 ON SCHEDULE EVERY 1 DAY
-DO CALL remover_servico_com_muita_denuncia();
+DO  
+BEGIN
+	-- Remover serviços que tenham mais de 40 denúncias
+	DELETE FROM servico
+	WHERE id IN (
+	SELECT id FROM (
+	SELECT s.id
+	FROM servico s
+	JOIN denuncia d ON s.id = d.FK_servico
+	GROUP BY s.id
+	HAVING COUNT(d.id) > 40
+	) AS subquery
+
+	-- As denúncias são removidas automaticamente devido ao ON DELETE CASCADE
+);
+END $$
 
 CREATE EVENT IF NOT EXISTS remover_servico_incompleto
 ON SCHEDULE EVERY 10 MINUTE
