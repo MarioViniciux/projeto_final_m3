@@ -1,57 +1,57 @@
-Banco de Dados para Gerenciamento de Serviços Gratuitos
+<h1>Banco de Dados para Gerenciamento de Serviços Gratuitos</h1>
 
-Problemática 
+<h2>Problemática</h2>
 
 Visto que muitas pessoas não possuem condições financeiras para pagarem por determinadas atividades, muitas instituições, impressas e locais buscam ofertar atendimentos de forma gratuita. Então decidimos conectar essas pessoas com essas entidades usando da tecnologia.
 
-Solução
+<h2>Solução</h2>
 
 Este banco de dados tem como objetivo facilitar a gestão de serviços gratuitos, com foco na administração de serviços, sugestões, feedbacks e acessibilidade.
 
-Estrutura do Banco de Dados
+<h2>Estrutura do Banco de Dados</h2>
 
-Tabelas
+<h3>Tabelas</h3>
 
-Serviços: Armazena os serviços disponíveis.
+1. Serviços: Armazena os serviços disponíveis.
 
-Novo Serviço: Sugestões de novos serviços enviadas pelos usuários.
+2. Novo Serviço: Sugestões de novos serviços enviadas pelos usuários.
 
-Novo Serviço Temporário: Salva o progresso do formulário de sugestão.
+3. Novo Serviço Temporário: Salva o progresso do formulário de sugestão.
 
-Avaliação: Feedback positivo dos usuários.
+4. Avaliação: Feedback positivo dos usuários.
 
-Avaliação Temporária: Salva o progresso do formulário de avaliação.
+5. Avaliação Temporária: Salva o progresso do formulário de avaliação.
 
-Denúncia: Feedback negativo dos usuários.
+6. Denúncia: Feedback negativo dos usuários.
 
-Denúncia Temporária: Salva o progresso do formulário de denúncia.
+7. Denúncia Temporária: Salva o progresso do formulário de denúncia.
 
-Admin: Gerencia os administradores do sistema.
+8. Admin: Gerencia os administradores do sistema.
 
-Acessibilidade: Informações sobre acessibilidade.
+9. Acessibilidade: Informações sobre acessibilidade.
 
-Categoria: Classificação de serviços (saúde, turismo, educação, esporte, etc.).
+10. Categoria: Classificação de serviços (saúde, turismo, educação, esporte, etc.).
 
-Funcionalidades
+<h3>Funcionalidades</h3>
 
-Cadastro e gerenciamento de serviços.
+- Cadastro e gerenciamento de serviços.
 
-Controle de sugestões e feedbacks.
+- Controle de sugestões e feedbacks.
 
-Salvamento de progresso de formulários.
+- Salvamento de progresso de formulários.
 
- Como Criar o Banco de Dados
+<h1>Como Criar o Banco de Dados</h1>
 
-Abra o MySQL Workbench
+1. Abra o MySQL Workbench
 
-Entre no localhost
+2. Entre no localhost
 
-Execute o arquivo creates.sql para a criação do banco de dados e tabelas
+3. Execute o arquivo creates.sql para a criação do banco de dados e tabelas
 
-Execute o arquivo procedure.sql para a criação das procedures
+4. Execute o arquivo procedure.sql para a criação das procedures
 
-Execute o arquivo event.sql para a craiação dos events
+5. Execute o arquivo event.sql para a craiação dos events
 
-Insira os dados manualmente, ou execute o arquivo insert_e_call.sql para criar dados ficticios 
+6. Insira os dados manualmente, ou execute o arquivo insert_e_call.sql para criar dados ficticios 
 
-Execute os selects no arquivo selects.sql
+7. Execute os selects no arquivo selects.sql
