@@ -70,3 +70,9 @@ SELECT cidade, COUNT(id) AS total_servicos
 FROM novo_servico
 GROUP BY cidade
 ORDER BY total_servicos DESC;
+
+
+# Quantidade de serviços ativos e inativos
+SELECT status, COUNT(id) AS total_servicos
+FROM servico
+GROUP BY status;
