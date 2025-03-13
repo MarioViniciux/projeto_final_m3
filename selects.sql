@@ -28,3 +28,10 @@ FROM novo_servico s
 JOIN novo_servico_acessibilidade sa ON s.id = sa.id_novo_servico
 JOIN acessibilidade a ON sa.id_acessibilidade = a.id
 GROUP BY s.id;
+
+
+# Quantidade de serviços por categoria
+SELECT c.categoria, COUNT(s.id) AS total_servicos
+FROM categoria c
+LEFT JOIN servico s ON c.id = s.FK_categoria
+GROUP BY c.categoria;
