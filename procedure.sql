@@ -26,9 +26,9 @@ SET feedback = p_feedback,
     WHERE browser_id = p_browser_id_avaliacao;
 END IF;
 
-    -- Se o registro estiver concluído, move os dados para a tabela denuncia
+     -- Se o registro estiver concluído, move os dados para a tabela denuncia
     IF p_concluido = TRUE THEN
-    INSERT INTO avaliacao (feedback, pontuacao, data, FK_servico)
+    INSERT INTO avaliacao (feedback, pontuacao, data, fk_servico)
     SELECT feedback, pontuacao, data, FK_servico
     FROM avaliacao_temp
     WHERE browser_id = p_browser_id_avaliacao;
@@ -43,13 +43,13 @@ BEGIN
     DECLARE existe INT;
     DECLARE novoID INT;
     
--- Verifica se o serviço existe e está pendente
+    -- Verifica se o serviço existe e está pendente
     SELECT COUNT(*) INTO existe FROM novo_servico WHERE ID = servicoID AND status = 'pendente';
 
 IF existe = 1 THEN
- -- Move o serviço para a tabela Serviços
-    INSERT INTO servico (FK_categoria, nome, funcionamento, requisitos, contato, descricao, cidade, bairro, rua, numero,CEP, created_at, updated_at)
-    SELECT FK_categoria, nome, funcionamento, requisitos, contato, descricao, cidade, bairro, rua, numero, CEP, created_at, NOW()
+    -- Move o serviço para a tabela Serviços
+    INSERT INTO servico (fk_categoria, nome, funcionamento, requisitos, contato, descricao, cidade, bairro, rua, numero,CEP, created_at, updated_at)
+    SELECT fk_categoria, nome, funcionamento, requisitos, contato, descricao, cidade, bairro, rua, numero, CEP, NOW(), NOW()
     FROM novo_servico WHERE ID = servicoID;
         
     SET novoID = LAST_INSERT_ID();
@@ -57,10 +57,18 @@ IF existe = 1 THEN
     INSERT INTO servico_acessibilidade (id_servico, id_acessibilidade)
     SELECT novoID, id_acessibilidade FROM novo_servico_acessibilidade WHERE id_novo_servico = servicoID;
         
- -- Atualiza o serviço como aprovado e registra o admin
+    -- Atualiza o serviço como aprovado e registra o admin
     UPDATE novo_servico
     SET status = 'aprovado', FK_admin = adminID
     WHERE ID = servicoID;
 
 END IF;
+END $$
+
+CREATE PROCEDURE rejeitar_servico(IN servicoID INT, IN adminID INT)
+BEGIN
+    -- Apenas atualiza o status para 'rejeitado' e registra o admin responsável
+    UPDATE novo_servico
+    SET status = 'rejeitado', FK_admin = adminID
+    WHERE ID = servicoID AND status = 'pendente';
 END $$
