@@ -76,3 +76,9 @@ ORDER BY total_servicos DESC;
 SELECT status, COUNT(id) AS total_servicos
 FROM servico
 GROUP BY status;
+
+
+# Quantidade de indicações de serviços por status
+SELECT status, COUNT(*) AS quantidade
+FROM novo_servico
+GROUP BY status;
